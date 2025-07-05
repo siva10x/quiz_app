@@ -67,35 +67,19 @@ with col_submit:
 
 st.info(f"**{grade_name}** &nbsp;>  **{subject_name}** &nbsp;> **{lesson_name}** &nbsp;> **{topic_name}**")
 
-# If quiz is submitted, show answers
-if st.session_state.get("quiz_submitted"):
-    st.success("🎉 Quiz submitted successfully!")
-
-    st.write("### Your Answers:")
-    for q in questions:
-        qid = q['question_id']
-        ans = st.session_state.answers.get(qid, ["Not Answered"])
-        st.write(f"**Q{qid}:** {ans}")
-
-    st.markdown("---")
-    st.page_link("main.py", label="🏠 Back to Home")
-    st.stop()
-
 # Display direct question number navigation
-# Number of questions per row
 buttons_per_row = 10
 total_questions = len(questions)
 
 for start in range(0, total_questions, buttons_per_row):
     count_in_row = min(buttons_per_row, total_questions - start)
-    cols = st.columns(buttons_per_row)  # always 10 columns for even spacing
+    cols = st.columns(buttons_per_row)
 
     for i in range(buttons_per_row):
         if i < count_in_row:
             q_index = start + i
             button_label = f"⚪ {q_index + 1}"
 
-            # Current question highlight
             if q_index == st.session_state.question_index:
                 button_label = f"🔵 {q_index + 1}"
             elif str(questions[q_index]['question_id']) in st.session_state.answers:
@@ -105,9 +89,7 @@ for start in range(0, total_questions, buttons_per_row):
                 st.session_state.question_index = q_index
                 st.rerun()
         else:
-            cols[i].markdown("")  # leave empty to preserve spacing
-
-
+            cols[i].markdown("")
 
 # Get current question
 current_index = st.session_state.question_index
@@ -121,33 +103,93 @@ if 'image_url' in question and question['image_url']:
 
 qid = question['question_id']
 
-# Question type handling
+# Show answers differently based on submission state
+quiz_submitted = st.session_state.get("quiz_submitted", False)
+user_answers = st.session_state.answers.get(qid, [])
+
 if question['question_type'] == 'single_choice':
     options = [opt['option_text'] for opt in question['options']]
-    selected = st.radio("Choose one:", options, key=f"q_{qid}")
-    st.session_state.answers[qid] = [selected]
+
+    selected = st.radio(
+        "Choose one:",
+        options,
+        key=f"q_{qid}",
+        index=options.index(user_answers[0]) if user_answers else None,
+        disabled=quiz_submitted
+    )
+
+    if not quiz_submitted:
+        if selected:
+            st.session_state.answers[qid] = [selected]
+    else:
+        for opt in question['options']:
+            opt_text = opt['option_text']
+            if opt_text in user_answers:
+                if opt['is_correct']:
+                    st.success(f"✅ Your Choice: {opt_text}")
+                else:
+                    st.error(f"❌ Your Choice: {opt_text}")
+            elif opt['is_correct']:
+                st.info(f"✅ Correct Answer: {opt_text}")
 
 elif question['question_type'] == 'multi_choice':
     options = [opt['option_text'] for opt in question['options']]
-    selected = st.multiselect("Select one or more:", options, key=f"q_{qid}")
-    st.session_state.answers[qid] = selected
+    selected = st.multiselect(
+        "Select one or more:",
+        options,
+        default=user_answers,
+        key=f"q_{qid}",
+        disabled=quiz_submitted
+    )
+    if not quiz_submitted:
+        st.session_state.answers[qid] = selected
+    else:
+        for opt in question['options']:
+            opt_text = opt['option_text']
+            if opt_text in selected:
+                if opt['is_correct']:
+                    st.success(f"✅ Your Choice: {opt_text}")
+                else:
+                    st.error(f"❌ Your Choice: {opt_text}")
+            elif opt['is_correct']:
+                st.info(f"✅ Correct Answer: {opt_text}")
 
 elif question['question_type'] == 'text_entry':
-    answer = st.text_input("Your answer:", key=f"q_{qid}")
-    st.session_state.answers[qid] = [answer]
+    answer = st.text_input(
+        "Your answer:",
+        value=user_answers[0] if user_answers else "",
+        key=f"q_{qid}",
+        disabled=quiz_submitted
+    )
+    if not quiz_submitted:
+        st.session_state.answers[qid] = [answer]
+    else:
+        correct_answer = question.get('correct_answer', 'Not Provided')
+        if answer == correct_answer:
+            st.success(f"✅ Your answer: {answer}")
+        else:
+            st.error(f"❌ Your answer: {answer}")
+            st.info(f"✅ Correct answer: {correct_answer}")
+
+# Navigation controls
+col1, col2, col3 = st.columns([1, 3, 1])
 
 # Navigation controls
 col1, col2, col3 = st.columns([1, 3, 1])
 
 with col1:
-    if st.button("⬅️ Previous") and current_index > 0:
-        st.session_state.question_index -= 1
-        st.rerun()
+    st.button(
+        "⬅️ Previous",
+        disabled=current_index == 0,
+        on_click=lambda: st.session_state.update(question_index=st.session_state.question_index - 1)
+    )
 
 with col3:
-    if st.button("Next ➡️") and current_index < len(questions) - 1:
-        st.session_state.question_index += 1
-        st.rerun()
+    st.button(
+        "Next ➡️",
+        disabled=current_index == len(questions) - 1,
+        on_click=lambda: st.session_state.update(question_index=st.session_state.question_index + 1)
+    )
 
 st.markdown("---")
 st.page_link("main.py", label="🏠 Back to Home")
