@@ -1,0 +1,19 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+
+# VSCode settings
+.vscode/
+
+# OS files
+.DS_Store
+
+# Streamlit cache
+.streamlit/
+
+# Logs
+*.log

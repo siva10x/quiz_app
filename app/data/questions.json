@@ -1,0 +1,88 @@
+[
+  {
+    "question_id": "1",
+    "grade": "grade_10",
+    "subject_id": "math_10",
+    "lesson_id": "algebra_10",
+    "topic_id": "linear_equations_10",
+    "question_text": "Solve the equation 2x + 3 = 7.",
+    "question_image": null,
+    "question_type": "multiple_choice",
+    "difficulty": "easy",
+    "options": [
+      {
+        "option_id": "a",
+        "option_text": "x = 2",
+        "option_image": null,
+        "is_correct": true
+      },
+      {
+        "option_id": "b",
+        "option_text": "x = 1",
+        "option_image": null,
+        "is_correct": false
+      },
+      {
+        "option_id": "c",
+        "option_text": "x = 3",
+        "option_image": null,
+        "is_correct": false
+      },
+      {
+        "option_id": "d",
+        "option_text": "x = 0",
+        "option_image": null,
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question_id": "2",
+    "grade": "grade_10",
+    "subject_id": "math_10",
+    "lesson_id": "geometry_10",
+    "topic_id": "triangles_10",
+    "question_text": "What is the sum of the interior angles of a triangle?",
+    "question_image": "images/triangle_diagram.png",
+    "question_type": "multiple_choice",
+    "difficulty": "medium",
+    "options": [
+      {
+        "option_id": "a",
+        "option_text": "90 degrees",
+        "option_image": null,
+        "is_correct": false
+      },
+      {
+        "option_id": "b",
+        "option_text": "180 degrees",
+        "option_image": null,
+        "is_correct": true
+      },
+      {
+        "option_id": "c",
+        "option_text": "360 degrees",
+        "option_image": null,
+        "is_correct": false
+      },
+      {
+        "option_id": "d",
+        "option_text": "270 degrees",
+        "option_image": null,
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "question_id": "3",
+    "grade": "grade_10",
+    "subject_id": "math_10",
+    "lesson_id": "algebra_10",
+    "topic_id": "linear_equations_10",
+    "question_text": "What is the value of x in 5x = 25?",
+    "question_image": null,
+    "question_type": "text_entry",
+    "difficulty": "easy",
+    "correct_answer": "5"
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Grade 10",
+    "grade_id": "grade_10",
+    "subjects": [
+      {
+        "name": "Mathematics",
+        "subject_id": "math_10",
+        "lessons": [
+          {
+            "name": "Algebra",
+            "lesson_id": "algebra_10",
+            "topics": [
+              {
+                "name": "Linear Equations",
+                "topic_id": "linear_equations_10"
+              },
+              {
+                "name": "Quadratic Equations",
+                "topic_id": "quadratic_equations_10"
+              },
+              {
+                "name": "Polynomials",
+                "topic_id": "polynomials_10"
+              }
+            ]
+          },
+          {
+            "name": "Geometry",
+            "lesson_id": "geometry_10",
+            "topics": [
+              {
+                "name": "Triangles",
+                "topic_id": "triangles_10"
+              },
+              {
+                "name": "Circles",
+                "topic_id": "circles_10"
+              },
+              {
+                "name": "Coordinate Geometry",
+                "topic_id": "coordinate_geometry_10"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Science",
+        "subject_id": "science_10",
+        "lessons": [
+          {
+            "name": "Physics",
+            "lesson_id": "physics_10",
+            "topics": [
+              {
+                "name": "Motion",
+                "topic_id": "motion_10"
+              },
+              {
+                "name": "Forces",
+                "topic_id": "forces_10"
+              },
+              {
+                "name": "Energy",
+                "topic_id": "energy_10"
+              }
+            ]
+          },
+          {
+            "name": "Chemistry",
+            "lesson_id": "chemistry_10",
+            "topics": [
+              {
+                "name": "Atomic Structure",
+                "topic_id": "atomic_structure_10"
+              },
+              {
+                "name": "Chemical Reactions",
+                "topic_id": "chemical_reactions_10"
+              },
+              {
+                "name": "Stoichiometry",
+                "topic_id": "stoichiometry_10"
+              }
+            ]
+          },
+          {
+            "name": "Biology",
+            "lesson_id": "biology_10",
+            "topics": [
+              {
+                "name": "Cell Biology",
+                "topic_id": "cell_biology_10"
+              },
+              {
+                "name": "Genetics",
+                "topic_id": "genetics_10"
+              },
+              {
+                "name": "Ecology",
+                "topic_id": "ecology_10"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
