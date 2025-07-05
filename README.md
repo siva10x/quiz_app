@@ -38,12 +38,11 @@ Supports single-choice, multiple-choice, and text-entry questions with clean inl
 ```
 quiz_app/
 ├── app/
-│   ├── data/                 # JSON data files (questions, metadata)
-│   ├── streamlit_app/        # Streamlit pages (main.py, quiz.py)
-│   └── utils/                # Python utilities (data_loader.py)
-├── api/
-│   └── app.py                # Flask API exposing questions
-├── screenshots/              # App screenshots for README
+│   ├── api/                 # Flask API exposing questions
+│   ├── data/                # JSON data files (questions, metadata)
+│   ├── streamlit_app/       # Streamlit pages (main.py, quiz.py)
+│   └── utils/               # Python utilities (data_loader.py)
+├── img/                     # App screenshots for README
 └── README.md
 ```
 
@@ -60,7 +59,7 @@ pip install -r requirements.txt
 ### 📦 Run the Flask API (optional)
 
 ```bash
-cd api
+cd app/api
 python app.py
 ```
 
@@ -77,7 +76,7 @@ streamlit run main.py
 
 - All data (questions, metadata) resides in `app/data/`
 - Quiz session state maintained via `st.session_state`
-- Customize the API port in `api/app.py` as needed
+- Customize the API port in `api/flask_api.py` as needed
 
 ---
 
